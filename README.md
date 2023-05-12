@@ -21,9 +21,13 @@ $ bin/rails s
 - フォロー・アンフォローするボタンは"フォローする"・"フォローを外す"とする。
 
 【Gemfile】
-Testグループに以下のgemを追加
-- gem 'capybara', '~> 3.23'
-- gem 'selenium-webdriver'
-- gem 'webdrivers' 
-Gemfileの最下部に以下のgemを追加
-- gem 'nokogiri', '1.12.5'
+
+- Testグループに以下のgemを追加
+  - gem 'capybara', '~> 3.23'
+  - gem 'selenium-webdriver'
+  - gem 'webdrivers'
+
+<br>
+
+- Gemfileの最下部に以下のgemを追加
+  - gem 'nokogiri', '1.12.5'
