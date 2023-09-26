@@ -1,0 +1,9 @@
+<div>
+  <h3>プロフィール</h3>
+  <%= image_tag @user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
+  <div>
+    <p><strong>Name:</strong><%= @user.name %></p>
+    <p><strong>Hobby:</strong><%= @user.hobby %></p>
+    <p><strong>Profile:</strong><%= @user.profile %></p>
+  </div>
+<div>
