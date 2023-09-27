@@ -14,6 +14,11 @@ class User < ApplicationRecord
   has_many :notification_timings, through: :user_notification_timings
   has_one_attached :avatar
 
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followings, through: :following_relationships
+  has_many :follower_relationships, foreign_key: 'followed_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followers, through: :follower_relationships
+
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
@@ -75,5 +80,17 @@ class User < ApplicationRecord
 
   def allow_liked_event_notification?
     notification_timings.liked_event.present?
+  end
+
+  def following?(user)
+    following_relationships.find_by(followed_id: user.id)
+  end
+
+  def follow(user)
+    following_relationships.create!(followed_id: user.id)
+  end
+
+  def unfollow(user)
+    following_relationships.find_by(followed_id: user.id).destroy
   end
 end
