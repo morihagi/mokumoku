@@ -1,0 +1,18 @@
+<div>
+  <h3>プロフィール</h3>
+  <%= image_tag @user.decorate.avatar, class: 'avatar-xl rounded-circle' %>
+  <div>
+    <p><strong>Name:</strong><%= @user.name %></p>
+    <p><strong>Hobby:</strong><%= @user.hobby %></p>
+    <p><strong>Profile:</strong><%= @user.profile %></p>
+  </div>
+  <% if current_user != @user %>
+    <div>
+      <% if current_user.following?(@user)%>
+        <p><%= link_to 'フォローを外す', relationship_path(@user), method: :delete, class: 'btn btn-danger'%></p>
+      <% else %>
+        <p><%= link_to 'フォローする', relationships_path(current_user, followed_id: @user.id), method: :post, class: 'btn btn-primary' %></p>
+      <% end %>
+    </div>
+  <% end %>
+<div>
